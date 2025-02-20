@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#coding">Coding Projects</a></li>
+                <li><a href="#artwork">3D Artwork</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌓</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="about" class="parallax">
+        <div class="content">
+            <h1>About Me</h1>
+            <p>Welcome to my portfolio! I'm a passionate coder and 3D artist.</p>
+        </div>
+    </section>
+
+    <section id="coding" class="parallax">
+        <div class="content">
+            <h1>Coding Projects</h1>
+            <div class="project-gallery">
+                <div class="project-item" onclick="expandProject(this)">
+                    <img src="https://placehold.co/10" alt="Coding Project 1">
+                    <div class="project-details">
+                        <h3>Project Title 1</h3>
+                        <p>Description of the first coding project</p>
+                        <div class="tech-stack">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item" onclick="expandProject(this)">
+                    <img src="https://placehold.co/10" alt="Coding Project 2">
+                    <div class="project-details">
+                        <h3>Project Title 2</h3>
+                        <p>Description of the second coding project</p>
+                        <div class="tech-stack">
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item" onclick="expandProject(this)">
+                    <img src="https://placehold.co/10" alt="Coding Project 3">
+                    <div class="project-details">
+                        <h3>Project Title 3</h3>
+                        <p>Description of the third coding project</p>
+                        <div class="tech-stack">
+                            <span>JavaScript</span>
+                            <span>Express</span>
+                            <span>MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="artwork" class="parallax">
+        <div class="content">
+            <h1>3D Artwork</h1>
+            <div class="artwork-gallery">
+                <div class="artwork-item" onclick="expandArtwork(this)">
+                    <img src="https://placehold.co/10" alt="3D Artwork 1">
+                    <div class="artwork-details">
+                        <h3>Project Title 1</h3>
+                        <p>Description of the first 3D artwork project</p>
+                    </div>
+                </div>
+                <div class="artwork-item" onclick="expandArtwork(this)">
+                    <img src="https://placehold.co/10" alt="3D Artwork 2">
+                    <div class="artwork-details">
+                        <h3>Project Title 2</h3>
+                        <p>Description of the second 3D artwork project</p>
+                    </div>
+                </div>
+                <div class="artwork-item" onclick="expandArtwork(this)">
+                    <img src="https://placehold.co/10" alt="3D Artwork 3">
+                    <div class="artwork-details">
+                        <h3>Project Title 3</h3>
+                        <p>Description of the third 3D artwork project</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <div class="content">
+            <h1>Contact</h1>
+            <form>
+                <input type="text" placeholder="Your Name">
+                <input type="email" placeholder="Your Email">
+                <textarea placeholder="Your Message"></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('.theme-icon');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            themeIcon.textContent = document.body.classList.contains('dark-theme') ? '🌞' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.textContent = '🌞';
+        }
+    </script>
+</body>
+
+</html>
