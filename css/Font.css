@@ -6,3 +6,11 @@
   font-family: "PortFolio-FontBlack";
   src: url("../Font/TitilliumWeb-Black.ttf");
 }
+strong {
+  color: rgb(0, 162, 255); /* Text color */
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; /* Black outline */
+}
+p {
+  color: white; /* Text color */
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; /* Black outline */
+}

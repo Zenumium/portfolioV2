@@ -5,6 +5,7 @@ html {
   font-family: "PortFolio-FontRegular";
   scroll-behavior: smooth;
   transition: background-color 0.3s, color 0.3s;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; /* Black outline */
 }
 
 body.dark-theme {
@@ -188,6 +189,7 @@ nav ul li a {
 .content {
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
+  margin-top: 115px;
   border-radius: 10px;
 }
 
