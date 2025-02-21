@@ -1,0 +1,38 @@
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.skill {
+  margin: 10px;
+  text-align: center;
+  color: black;
+}
+
+.skill img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 15px;
+}
+.skill {
+  position: relative;
+  display: inline-block;
+}
+
+.skill-name {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.skill:hover .skill-name {
+  opacity: 1;
+}
