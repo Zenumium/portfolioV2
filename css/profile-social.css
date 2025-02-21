@@ -1,0 +1,26 @@
+.profile-pic {
+  width: 170px;
+  height: 170px;
+  object-fit: cover; /* This ensures the image maintains its aspect ratio */
+  border-radius: 50%; /* This makes it circular - remove if you want it square */
+}
+.social-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center; /* Centers the social links horizontally */
+  margin-top: 15px;
+}
+.social-links a {
+  display: inline-block;
+}
+
+.social-links img {
+  width: 30px; /* Small icon size */
+  height: 30px;
+  transition: transform 0.2s ease; /* Smooth hover effect */
+}
+
+.social-links img:hover {
+  transform: scale(1.1); /* Slight grow effect on hover */
+}
