@@ -6,6 +6,8 @@
     <title>My Portfolio</title>
     <link rel="icon" href="./icon/favicon.png" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/skills.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/profile-social.css" />
   </head>
   <body>
@@ -64,31 +66,47 @@
               <h3>Technical Skills</h3>
               <div class="skills-grid">
                 <div class="skill-category">
-                  <h4>Frontend</h4>
-                  <ul>
-                    <li>React</li>
-                    <li>Vue.js</li>
-                    <li>HTML5/CSS3</li>
-                  </ul>
+                  <!-- SKILLS -->
+                  <div class="skill">
+                    <img src="./icon/HTML5.png" alt="HTML5" />
+                    <span class="skill-name">HTML5</span>
+                  </div>
+                <div class="skill">
+                  <img src="./icon/photoshop.png" alt="Photoshop" />
+                  <span class="skill-name">Photoshop</span>
                 </div>
-                <div class="skill-category">
-                  <h4>Backend</h4>
-                  <ul>
-                    <li>Node.js</li>
-                    <li>Python</li>
-                    <li>PHP</li>
-                  </ul>
-                </div>
-                <div class="skill-category">
-                  <h4>3D Art</h4>
-                  <ul>
-                    <li>Blender</li>
-                    <li>Maya</li>
-                    <li>Substance Painter</li>
-                  </ul>
-                </div>
+                <div class="skill">
+                    <img src="./icon/pt.png" alt="Subtance Painter" />
+                    <span class="skill-name">Subtance Painter</span>
+                  </div>
+              <div class="skill">
+                <img src="./icon/CSS3.png" alt="CSS3" />
+                <span class="skill-name">CSS3</span>
               </div>
             </div>
+          </div>
+          <!-- END SKILLS -->
+          <div class="skill-category">
+            <div class="skill">
+              <img src="./icon/golang.png" alt="GO" />
+              <span class="skill-name">Golang</span>
+            </div>
+          <div class="skill">
+            <img src="./icon/javascript.png" alt="Javascript" />
+            <span class="skill-name">JavaScript</span>
+          </div>
+          <div class="skill">
+            <img src="./icon/docker.png" alt="Docker" />
+            <span class="skill-name">Docker</span>
+          </div>
+        <div class="skill-category">
+          <div class="skill">
+            <img src="./icon/blender.png" alt="Blender" />
+            <span class="skill-name">Blender</span>
+          </div>
+          <div class="skill">
+            <img src="./icon/unity.png" alt="Blender" />
+            <span class="skill-name">Unity</span>
           </div>
         </div>
       </div>
@@ -99,39 +117,64 @@
         <h1>Coding Projects</h1>
         <h2>all of my coding project</h2>
         <div class="project-gallery">
-          <div class="project-item" onclick="expandProject(this)">
-            <img src="https://placehold.co/10" alt="Coding Project 1" />
+          <div class="project-item">
+            <img src="./images/pacman.png" alt="Coding Project 1" />
             <div class="project-details">
-              <h3>Project Title 1</h3>
-              <p>Description of the first coding project</p>
+              <h3>Pacman</h3>
+              <p>i remade pacman using</p>
               <div class="tech-stack">
-                <span>React</span>
-                <span>Node.js</span>
-                <span>MongoDB</span>
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>Javascript</span>
               </div>
             </div>
           </div>
-          <div class="project-item" onclick="expandProject(this)">
-            <img src="https://placehold.co/10" alt="Coding Project 2" />
+          <div class="project-item">
+            <img src="./images/music_game.png" alt="Coding Project 2" />
             <div class="project-details">
-              <h3>Project Title 2</h3>
-              <p>Description of the second coding project</p>
+              <h3>rhythm-game (W.I.P)</h3>
+              <p>a Guitar hero like remade using</p>
               <div class="tech-stack">
-                <span>Python</span>
-                <span>Flask</span>
-                <span>PostgreSQL</span>
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>Javascript</span>
               </div>
             </div>
           </div>
-          <div class="project-item" onclick="expandProject(this)">
-            <img src="https://placehold.co/10" alt="Coding Project 3" />
+          <div class="project-item">
+            <img src="./images/login.png"alt="Coding Project 3" />
             <div class="project-details">
-              <h3>Project Title 3</h3>
-              <p>Description of the third coding project</p>
+              <h3>test Login (W.I.P)</h3>
+              <p>a project, i made early on using</p>
               <div class="tech-stack">
-                <span>JavaScript</span>
-                <span>Express</span>
-                <span>MySQL</span>
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>Javascript</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-item">
+            <img src="./images/doom.png"alt="Coding Project 4" />
+            <div class="project-details">
+              <h3>Doom.js using p5library (W.I.P)</h3>
+              <p>a project, i made using</p>
+              <div class="tech-stack">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>Javascript</span>
+                <span>p5js library</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-item">
+            <img src="./images/space_invader.png"alt="Coding Project 5" />
+            <div class="project-details">
+              <h3>Space Attack (current project)</h3>
+              <p>project, i made using</p>
+              <div class="tech-stack">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>Javascript</span>
               </div>
             </div>
           </div>
@@ -144,7 +187,7 @@
         <h1>3D Artwork</h1>
         <h2>all of my 3D artwork</h2>
         <div class="artwork-gallery">
-          <div class="artwork-item" onclick="expandArtwork(this)">
+          <div class="artwork-item">
             <img src="https://placehold.co/10" alt="3D Artwork 1" />
             <div class="artwork-details">
               <h3>Project Title 1</h3>
@@ -155,7 +198,7 @@
               </div>
             </div>
           </div>
-          <div class="artwork-item" onclick="expandArtwork(this)">
+          <div class="artwork-item">
             <img src="https://placehold.co/10" alt="3D Artwork 2" />
             <div class="artwork-details">
               <h3>Project Title 2</h3>
@@ -166,7 +209,7 @@
               </div>
             </div>
           </div>
-          <div class="artwork-item" onclick="expandArtwork(this)">
+          <div class="artwork-item">
             <img src="https://placehold.co/10" alt="3D Artwork 3" />
             <div class="artwork-details">
               <h3>Project Title 3</h3>
@@ -216,5 +259,11 @@
         themeIcon.textContent = "🌞";
       }
     </script>
+        <!-- copyright section -->
+        <footer>
+            <p class="cp-text">
+              © Copyright 2025 Projeckt Aqua. All rights reserved.
+            </p>
+          </footer>
   </body>
 </html>
