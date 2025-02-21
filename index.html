@@ -2,19 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="icon" href="./icon/favicon.png">
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/skills.css" />
     <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/mobile.css" />
+    <link rel="stylesheet" href="./css/musicbutton.css" />
 
     <link rel="stylesheet" href="./css/Font.css" />
     <link rel="stylesheet" href="./css/profile-social.css" />
+
   </head>
   <body>
     <header>
-      <nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon">☰</span>
+      </button>
+      <nav class="nav-menu">
         <ul>
           <li><a href="#about">About Me</a></li>
           <li><a href="#coding">Coding Projects</a></li>
@@ -25,7 +31,6 @@
               <span class="theme-icon">🌓</span>
             </button>
           </li>
-        </ul>
       </nav>
     </header>
 
@@ -364,6 +369,7 @@
             🔇 Mute Music
           </button>
           
+          <script src="./js/Hamburgermobile.js"></script>
           <script src="./js/clicksound.js"></script>
           <script src="./js/script.js"></script>
   </body>
