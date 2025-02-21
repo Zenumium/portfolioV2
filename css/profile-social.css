@@ -50,7 +50,7 @@
   position: relative;
   border: 2px solid #fff;
   border-radius: 50%;
-  overflow: hidden;
+
   animation: borderAnimation 2s infinite;
 }
 
