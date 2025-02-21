@@ -1,0 +1,98 @@
+/* Mobile Navigation Styles */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  position: fixed; /* Changed to fixed */
+
+  top: 35px; /* Fixed position from top */
+  z-index: 1001;
+}
+
+.hamburger-icon {
+  font-size: 30px;
+  color: white;
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 60px 0 20px; /* Reduced top padding */
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 15px 0;
+    text-align: left;
+    padding: 0 20px;
+  }
+
+  nav ul li a {
+    font-size: 18px;
+    display: block;
+    padding: 10px 0;
+    color: white;
+  }
+
+  /* Adjust theme toggle position */
+  #theme-toggle {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 15px 20px;
+  }
+
+  /* Backdrop when menu is open */
+  .menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .menu-backdrop.active {
+    display: block;
+  }
+
+  /* Adjust mute button position */
+  #mute-music {
+    top: 15px;
+    left: 60px; /* Move to the right of hamburger */
+  }
+}
+
+/* Dark theme adjustments */
+.dark-theme .nav-menu {
+  background: rgba(30, 30, 30, 0.95);
+}
