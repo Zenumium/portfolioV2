@@ -60,12 +60,12 @@
             <p class="intro">
               Hello, I'm <strong>Valentyn,</strong> a 25-year-old passionate
               about <strong>coding and 3D modeling.</strong> With a strong
-              interest in technology and art, I've been exploring the
+              interest in <strong>technology and art</strong>, I've been exploring the
               intersection of these two fields to create innovative and visually
-              stunning projects. On this portfolio, I'll be showcasing my coding
-              and 3D modeling endeavors, from conceptualization to completion.
-              Take a look around and discover the projects that I'm proud to
-              call my own.
+              stunning projects. On this portfolio, <strong>I'll be showcasing my coding
+              and 3D modeling endeavors</strong>, from conceptualization to completion.
+              Take a look around and discover <strong>the projects that I'm proud to
+              call my own.</strong>
             </p>
             <div class="skills-section">
               <h3>Technical Skills</h3>
@@ -251,6 +251,32 @@
               </div>
             </div>
           </div>
+          <div class="artwork-item">
+            <img src="./images/3d_model_img/Screenshot_2024-01-01_174258.png" alt="3D Artwork 3" />
+            <div class="artwork-details">
+              <h3>Soda Cartoon can</h3>
+              <p>I made this model Form Scatch back in 2024, it was a fun project to do, it related to a Character named Skarlet Bunny
+                form Friday Night Funkin
+              </p>
+              <div class="tech-stack">
+                <span>Blender</span>
+                <span>Substance Painter</span>
+                <span>Unity</span>
+              </div>
+            </div>
+          </div>
+          <div class="artwork-item">
+            <img src="./images/3d_model_img/test.png" alt="3D Artwork 3" />
+            <div class="artwork-details">
+              <h3>Experiment model</h3>
+              <p>just a model i made to test out some new technic, i made this model back in 2024, it was a fun project</p>
+              <div class="tech-stack">
+                <span>Blender</span>
+                <span>Substance Painter</span>
+                <span>Unity</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -267,7 +293,7 @@
       </div>
     </section>
 
-    <script src="./js/script.js"></script>
+
     <script>
       const themeToggle = document.getElementById("theme-toggle");
       const themeIcon = themeToggle.querySelector(".theme-icon");
@@ -289,6 +315,38 @@
         document.body.classList.add("dark-theme");
         themeIcon.textContent = "🌞";
       }
+      document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("background-music");
+    const muteButton = document.getElementById("mute-music");
+
+    // Try to autoplay
+    audio.volume = 0.17; // ajust the sound of the music playing
+    const playPromise = audio.play();
+
+    // If autoplay is blocked, wait for any user interaction
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        console.log("Autoplay blocked. Waiting for user interaction...");
+        document.body.addEventListener("click", playOnInteraction, { once: true });
+      });
+    }
+
+    // Function to play audio on first user click
+    function playOnInteraction() {
+      audio.play().catch(error => console.log("Playback failed:", error));
+    }
+
+    // Toggle mute/unmute
+    muteButton.addEventListener("click", () => {
+      if (audio.muted) {
+        audio.muted = false;
+        muteButton.textContent = "🔇 Mute Music";
+      } else {
+        audio.muted = true;
+        muteButton.textContent = "🎵 Unmute Music";
+      }
+    });
+  });
     </script>
         <!-- copyright section -->
         <footer>
@@ -296,5 +354,16 @@
               © Copyright 2025 Projeckt Aqua. All rights reserved.
             </p>
           </footer>
+          <audio id="background-music" loop>
+            <source src="./OST/5 MINUTES OF (No Copyright Music) CHILL LOFI HIP HOP BEAT (Royalty free).mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
+          
+          <button id="mute-music" style="position: fixed; top: 10px; left: 10px; z-index: 1000;">
+            🔇 Mute Music
+          </button>
+          
+          
+          <script src="./js/script.js"></script>
   </body>
 </html>
