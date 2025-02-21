@@ -84,16 +84,17 @@ nav ul li a {
 
 #about {
   background-image: url("../images/city.gif");
+  min-height: 50vh;
 }
 
 #coding {
   background-image: url("../images/code\ GIF.gif");
-  min-height: 100vh;
+  min-height: 50vh;
 }
 
 #artwork {
   background-image: url("../images/8bit\ GIF.gif");
-  min-height: 100vh;
+  min-height: 50vh;
 }
 
 .project-gallery,
