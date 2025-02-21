@@ -22,7 +22,7 @@
 
 .skill-name {
   position: absolute;
-  top: 70%;
+  top: 75%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
