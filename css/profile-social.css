@@ -46,3 +46,28 @@
 .social-links a:hover .tooltip {
   opacity: 1;
 }
+.profile-pic {
+  position: relative;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: borderAnimation 2s infinite;
+}
+
+@keyframes borderAnimation {
+  0% {
+    border-color: #fff;
+  }
+  25% {
+    border-color: #ccc;
+  }
+  50% {
+    border-color: #666666;
+  }
+  75% {
+    border-color: #ccc;
+  }
+  100% {
+    border-color: #fff;
+  }
+}
