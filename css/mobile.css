@@ -30,7 +30,7 @@
     left: -100%;
     width: 75%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(255, 255, 255, 0.1);
     padding: 60px 0 20px; /* Reduced top padding */
     transition: left 0.3s ease;
     overflow-y: auto;
