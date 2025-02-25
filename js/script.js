@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Gallery functionality for both artwork and projects
   function setupGallery(selector) {
     const items = document.querySelectorAll(selector);
 
-    // Check if elements exist before proceeding
     if (items.length === 0) {
       console.warn(`No elements found with selector: ${selector}`);
       return;
@@ -12,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     items.forEach((item) => {
       const imageContainer = item.querySelector(".image-container");
 
-      // Validate required elements exist
       if (!imageContainer) {
         console.warn(`No .image-container found in ${selector}`);
         return;
@@ -22,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const prevButton = imageContainer.querySelector(".prev");
       const nextButton = imageContainer.querySelector(".next");
 
-      // Validate required elements exist
       if (!images.length) {
         console.warn(`No images found in ${selector}`);
         return;
@@ -34,12 +30,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let currentIndex = 0;
 
-      // Show initial image
+      // Initially hide navigation buttons
+      prevButton.style.display = "none";
+      nextButton.style.display = "none";
+
+      const counter = document.createElement("div");
+      counter.className = "image-counter";
+      let dotsHtml = "";
+      for (let i = 0; i < images.length; i++) {
+        dotsHtml += `<span class="dot ${i === 0 ? "active" : ""}" data-index="${i}">${i + 1}</span>`;
+        if (i < images.length - 1) {
+          dotsHtml += ".";
+        }
+      }
+      counter.innerHTML = dotsHtml;
+      counter.style.position = "absolute";
+      counter.style.bottom = "10px";
+      counter.style.left = "50%";
+      counter.style.transform = "translateX(-50%)";
+      counter.style.background = "rgba(0, 0, 0, 0.7)";
+      counter.style.color = "white";
+      counter.style.padding = "5px 15px";
+      counter.style.borderRadius = "15px";
+      counter.style.fontSize = "20px";
+      counter.style.fontWeight = "bold";
+      counter.style.zIndex = "5";
+      counter.style.display = "none";
+      counter.style.textAlign = "center";
+
+      const style = document.createElement("style");
+      style.textContent = `
+        .image-counter .dot {
+          display: inline-block;
+          cursor: pointer;
+          transition: transform 0.2s, color 0.2s;
+        }
+        .image-counter .dot.active {
+          color: #FFF;
+          transform: scale(1.2);
+        }
+        .image-counter .dot:not(.active) {
+          color: #CCC;
+        }
+      `;
+      document.head.appendChild(style);
+
+      imageContainer.style.position = "relative";
+      imageContainer.appendChild(counter);
+
       images.forEach((img, index) => {
         img.style.display = index === 0 ? "block" : "none";
       });
 
-      // Navigation handlers
+      function updateImageDisplay() {
+        images.forEach((img, index) => {
+          img.style.display = index === currentIndex ? "block" : "none";
+        });
+
+        counter.querySelectorAll(".dot").forEach((dot, index) => {
+          if (index === currentIndex) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+
       prevButton.addEventListener("click", (e) => {
         e.stopPropagation();
         currentIndex = (currentIndex - 1 + images.length) % images.length;
@@ -52,47 +108,56 @@ document.addEventListener("DOMContentLoaded", function () {
         updateImageDisplay();
       });
 
-      function updateImageDisplay() {
-        images.forEach((img, index) => {
-          img.style.display = index === currentIndex ? "block" : "none";
+      counter.querySelectorAll(".dot").forEach((dot) => {
+        dot.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentIndex = parseInt(dot.getAttribute("data-index"));
+          updateImageDisplay();
         });
-      }
+      });
 
       item.addEventListener("click", function () {
-        // Collapse any previously expanded item
         const expanded = document.querySelector(`${selector}.expanded`);
         if (expanded && expanded !== this) {
           expanded.classList.remove("expanded");
+          expanded.querySelector(".image-counter").style.display = "none";
+          expanded.querySelector(".prev").style.display = "none";
+          expanded.querySelector(".next").style.display = "none";
         }
-        // Toggle expanded state for clicked item
+
         this.classList.toggle("expanded");
-        // Reset to first image when expanding
+
+        const itemCounter = this.querySelector(".image-counter");
+        itemCounter.style.display = this.classList.contains("expanded") ? "block" : "none";
+
+        // Show or hide navigation buttons when expanded
+        prevButton.style.display = this.classList.contains("expanded") ? "block" : "none";
+        nextButton.style.display = this.classList.contains("expanded") ? "block" : "none";
+
         if (this.classList.contains("expanded")) {
           currentIndex = 0;
           updateImageDisplay();
         }
-        // Prevent scrolling when item is expanded
-        document.body.style.overflow = this.classList.contains("expanded")
-          ? "hidden"
-          : "auto";
+
+        document.body.style.overflow = this.classList.contains("expanded") ? "hidden" : "auto";
       });
     });
 
-    // Close expanded items when clicking outside
     document.addEventListener("click", function (event) {
       const expanded = document.querySelector(`${selector}.expanded`);
       if (expanded && !expanded.contains(event.target)) {
         expanded.classList.remove("expanded");
+        expanded.querySelector(".image-counter").style.display = "none";
+        expanded.querySelector(".prev").style.display = "none";
+        expanded.querySelector(".next").style.display = "none";
         document.body.style.overflow = "auto";
       }
     });
   }
 
-  // Initialize galleries
   setupGallery(".artwork-item");
   setupGallery(".project-item");
 
-  // Smooth scrolling for navigation links
   const navLinks = document.querySelectorAll("nav ul li a");
   if (navLinks.length) {
     navLinks.forEach((anchor) => {

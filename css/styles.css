@@ -249,6 +249,7 @@ nav ul li a {
 
 /* Typography */
 h1 {
+  color: white;
   font-size: 3em;
   margin-bottom: 2px;
 }
@@ -262,9 +263,16 @@ p {
 /* Contact section */
 #contact {
   padding: 50px 20px;
-  background: #f4f4f4;
+  background-image: url("../images/Email.gif");
+  background-attachment: fixed; /* Enable parallax effect */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
 }
+
+
+
 
 form {
   max-width: 600px;
