@@ -22,19 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       let currentIndex = 0;
-      item.addEventListener("keydown", function (e) {
-        if (this.classList.contains("expanded")) {
-          if (e.key === "ArrowLeft") {
-            e.preventDefault();
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateImageDisplay();
-          } else if (e.key === "ArrowRight") {
-            e.preventDefault();
-            currentIndex = (currentIndex + 1) % images.length;
-            updateImageDisplay();
-          }
-        }
-      });
+      let intervalId;
+
       const counter = document.createElement("div");
       counter.className = "image-counter";
       let dotsHtml = "";
@@ -81,17 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
       imageContainer.style.position = "relative";
       imageContainer.appendChild(counter);
 
-      // **Ensure images are centered and ready for smooth transitions**
       images.forEach((img, index) => {
         img.style.position = "absolute";
         img.style.top = "50%";
         img.style.left = "50%";
-        img.style.transform = "translate(-50%, -50%)"; // Keep centered
-        img.style.width = "auto"; // Adjust to image size
-        img.style.height = "100%"; // Ensures it covers the container
+        img.style.transform = "translate(-50%, -50%)";
+        img.style.width = "auto";
+        img.style.height = "100%";
         img.style.transition = "opacity 0.5s ease";
-        img.style.opacity = index === 0 ? "1" : "0"; // Show first image, hide others
-        img.style.zIndex = index === 0 ? "1" : "0"; // Ensure correct layering
+        img.style.opacity = index === 0 ? "1" : "0";
+        img.style.zIndex = index === 0 ? "1" : "0";
       });
 
       function updateImageDisplay() {
@@ -104,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
           img.style.height = "100%";
           img.style.transition = "opacity 0.5s ease";
           img.style.opacity = index === currentIndex ? "1" : "0";
-          img.style.zIndex = index === currentIndex ? "5" : "0"; // 🔹 Lower than text
+          img.style.zIndex = index === currentIndex ? "5" : "0";
           img.style.display = "block";
         });
 
@@ -112,8 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
           dot.classList.toggle("active", index === currentIndex);
         });
       }
-      // Automatic image switching
-      let intervalId;
+
       const startAutoSwitch = () => {
         intervalId = setInterval(() => {
           currentIndex = (currentIndex + 1) % images.length;
@@ -121,13 +108,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5000);
       };
 
-      // Start auto-switch when item is expanded
+      const stopAutoSwitch = () => {
+        clearInterval(intervalId);
+      };
+
       item.addEventListener("click", function () {
         const expanded = document.querySelector(`${selector}.expanded`);
         if (expanded && expanded !== this) {
           expanded.classList.remove("expanded");
           expanded.querySelector(".image-counter").style.display = "none";
-          clearInterval(intervalId);
+          if (expanded.intervalId) {
+            clearInterval(expanded.intervalId);
+          }
+          expanded.intervalId = null;
         }
 
         this.classList.toggle("expanded");
@@ -141,6 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
           currentIndex = 0;
           updateImageDisplay();
           startAutoSwitch();
+          this.intervalId = intervalId;
+        } else {
+          stopAutoSwitch();
+          this.intervalId = null;
         }
 
         document.body.style.overflow = this.classList.contains("expanded")
@@ -148,13 +145,17 @@ document.addEventListener("DOMContentLoaded", function () {
           : "auto";
       });
 
-      // Stop auto-switch when clicking outside
       document.addEventListener("click", function (event) {
         const expanded = document.querySelector(`${selector}.expanded`);
         if (expanded && !expanded.contains(event.target)) {
+          if (expanded.intervalId) {
+            clearInterval(expanded.intervalId);
+          }
+          expanded.intervalId = null;
+          currentIndex = 0;
+          updateImageDisplay();
           expanded.classList.remove("expanded");
           expanded.querySelector(".image-counter").style.display = "none";
-          clearInterval(intervalId);
           document.body.style.overflow = "auto";
         }
       });
