@@ -16,29 +16,32 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const images = imageContainer.querySelectorAll("img");
-      const prevButton = imageContainer.querySelector(".prev");
-      const nextButton = imageContainer.querySelector(".next");
-
       if (!images.length) {
         console.warn(`No images found in ${selector}`);
         return;
       }
-      if (!prevButton || !nextButton) {
-        console.warn(`Navigation buttons missing in ${selector}`);
-        return;
-      }
 
       let currentIndex = 0;
-
-      // Initially hide navigation buttons
-      prevButton.style.display = "none";
-      nextButton.style.display = "none";
-
+      item.addEventListener("keydown", function (e) {
+        if (this.classList.contains("expanded")) {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImageDisplay();
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImageDisplay();
+          }
+        }
+      });
       const counter = document.createElement("div");
       counter.className = "image-counter";
       let dotsHtml = "";
       for (let i = 0; i < images.length; i++) {
-        dotsHtml += `<span class="dot ${i === 0 ? "active" : ""}" data-index="${i}">${i + 1}</span>`;
+        dotsHtml += `<span class="dot ${
+          i === 0 ? "active" : ""
+        }" data-index="${i}">${i + 1}</span>`;
         if (i < images.length - 1) {
           dotsHtml += ".";
         }
@@ -78,34 +81,82 @@ document.addEventListener("DOMContentLoaded", function () {
       imageContainer.style.position = "relative";
       imageContainer.appendChild(counter);
 
+      // **Ensure images are centered and ready for smooth transitions**
       images.forEach((img, index) => {
-        img.style.display = index === 0 ? "block" : "none";
+        img.style.position = "absolute";
+        img.style.top = "50%";
+        img.style.left = "50%";
+        img.style.transform = "translate(-50%, -50%)"; // Keep centered
+        img.style.width = "auto"; // Adjust to image size
+        img.style.height = "100%"; // Ensures it covers the container
+        img.style.transition = "opacity 0.5s ease";
+        img.style.opacity = index === 0 ? "1" : "0"; // Show first image, hide others
+        img.style.zIndex = index === 0 ? "1" : "0"; // Ensure correct layering
       });
 
       function updateImageDisplay() {
         images.forEach((img, index) => {
-          img.style.display = index === currentIndex ? "block" : "none";
+          img.style.position = "absolute";
+          img.style.top = "50%";
+          img.style.left = "50%";
+          img.style.transform = "translate(-50%, -50%)";
+          img.style.width = "auto";
+          img.style.height = "100%";
+          img.style.transition = "opacity 0.5s ease";
+          img.style.opacity = index === currentIndex ? "1" : "0";
+          img.style.zIndex = index === currentIndex ? "5" : "0"; // 🔹 Lower than text
+          img.style.display = "block";
         });
 
         counter.querySelectorAll(".dot").forEach((dot, index) => {
-          if (index === currentIndex) {
-            dot.classList.add("active");
-          } else {
-            dot.classList.remove("active");
-          }
+          dot.classList.toggle("active", index === currentIndex);
         });
       }
+      // Automatic image switching
+      let intervalId;
+      const startAutoSwitch = () => {
+        intervalId = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          updateImageDisplay();
+        }, 5000);
+      };
 
-      prevButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateImageDisplay();
+      // Start auto-switch when item is expanded
+      item.addEventListener("click", function () {
+        const expanded = document.querySelector(`${selector}.expanded`);
+        if (expanded && expanded !== this) {
+          expanded.classList.remove("expanded");
+          expanded.querySelector(".image-counter").style.display = "none";
+          clearInterval(intervalId);
+        }
+
+        this.classList.toggle("expanded");
+
+        const itemCounter = this.querySelector(".image-counter");
+        itemCounter.style.display = this.classList.contains("expanded")
+          ? "block"
+          : "none";
+
+        if (this.classList.contains("expanded")) {
+          currentIndex = 0;
+          updateImageDisplay();
+          startAutoSwitch();
+        }
+
+        document.body.style.overflow = this.classList.contains("expanded")
+          ? "hidden"
+          : "auto";
       });
 
-      nextButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex + 1) % images.length;
-        updateImageDisplay();
+      // Stop auto-switch when clicking outside
+      document.addEventListener("click", function (event) {
+        const expanded = document.querySelector(`${selector}.expanded`);
+        if (expanded && !expanded.contains(event.target)) {
+          expanded.classList.remove("expanded");
+          expanded.querySelector(".image-counter").style.display = "none";
+          clearInterval(intervalId);
+          document.body.style.overflow = "auto";
+        }
       });
 
       counter.querySelectorAll(".dot").forEach((dot) => {
@@ -115,43 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
           updateImageDisplay();
         });
       });
-
-      item.addEventListener("click", function () {
-        const expanded = document.querySelector(`${selector}.expanded`);
-        if (expanded && expanded !== this) {
-          expanded.classList.remove("expanded");
-          expanded.querySelector(".image-counter").style.display = "none";
-          expanded.querySelector(".prev").style.display = "none";
-          expanded.querySelector(".next").style.display = "none";
-        }
-
-        this.classList.toggle("expanded");
-
-        const itemCounter = this.querySelector(".image-counter");
-        itemCounter.style.display = this.classList.contains("expanded") ? "block" : "none";
-
-        // Show or hide navigation buttons when expanded
-        prevButton.style.display = this.classList.contains("expanded") ? "block" : "none";
-        nextButton.style.display = this.classList.contains("expanded") ? "block" : "none";
-
-        if (this.classList.contains("expanded")) {
-          currentIndex = 0;
-          updateImageDisplay();
-        }
-
-        document.body.style.overflow = this.classList.contains("expanded") ? "hidden" : "auto";
-      });
-    });
-
-    document.addEventListener("click", function (event) {
-      const expanded = document.querySelector(`${selector}.expanded`);
-      if (expanded && !expanded.contains(event.target)) {
-        expanded.classList.remove("expanded");
-        expanded.querySelector(".image-counter").style.display = "none";
-        expanded.querySelector(".prev").style.display = "none";
-        expanded.querySelector(".next").style.display = "none";
-        document.body.style.overflow = "auto";
-      }
     });
   }
 
