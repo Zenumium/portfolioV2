@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     navMenu.classList.toggle("active");
     menuToggle.classList.toggle("active");
     backdrop.classList.toggle("active");
-    body.style.overflow = navMenu.classList.contains("active") ? "hidden" : "";
+    body.style.overflow = navMenu.classList.contains("active");
+    ("auto");
   }
 
   // Event listeners
