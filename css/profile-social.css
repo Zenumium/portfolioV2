@@ -51,7 +51,7 @@
   position: relative;
   border: 2px solid #fff;
   border-radius: 50%;
-  left:25px;
+  left:65px;
 
   animation: borderAnimation 2s infinite;
 }
@@ -117,4 +117,18 @@
   border-width: 5px;
   border-style: solid;
   border-color: #36393f transparent transparent transparent;
+}
+.qr-code{
+  position: relative;
+  width: 125px;
+  height: 125px;
+  bottom: 0px;
+  left: 180px;
+}
+.QR{
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  top: 1px;
+  left: 182px;
 }
