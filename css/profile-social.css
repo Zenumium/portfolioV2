@@ -51,6 +51,7 @@
   position: relative;
   border: 2px solid #fff;
   border-radius: 50%;
+  left:25px;
 
   animation: borderAnimation 2s infinite;
 }
@@ -77,7 +78,7 @@
   display: inline-block;
   cursor: pointer;
   top: -10px;
-  left: -50px;
+  left: -25px;
 }
 
 .discord-icon {
