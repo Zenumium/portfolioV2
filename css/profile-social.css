@@ -72,3 +72,48 @@
     border-color: #fff;
   }
 }
+.discord-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  top: -10px;
+  left: -50px;
+}
+
+.discord-icon {
+  width: 48px;
+  height: 48px;
+
+}
+
+.discord-tag {
+  position: absolute;
+  top: -40px;
+  left: 25px;
+  transform: translateX(-50%);
+  background-color: #36393f;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.discord-container:hover .discord-tag {
+  opacity: 1;
+}
+
+/* Arrow pointing down */
+.discord-tag:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #36393f transparent transparent transparent;
+}
