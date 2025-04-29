@@ -89,8 +89,8 @@
 
 .discord-tag {
   position: absolute;
-  top: -40px;
-  left: 25px;
+  top: 90px;
+  left: 62px;
   transform: translateX(-50%);
   background-color: #36393f;
   color: white;
